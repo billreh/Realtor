@@ -31,9 +31,51 @@ CREATE TABLE listing (
 	bathrooms DECIMAL(2,1),
 	bedrooms INT,
 	square_feet INT,
+	main_photo varchar(100),
 	PRIMARY KEY(id),
 	FOREIGN KEY (address_id) REFERENCES address(id),
 	FOREIGN KEY (agent_id) REFERENCES agent(id)
+);
+
+create table photo (
+	id bigint not null auto_increment,
+	listing_id bigint,
+	name varchar(100),
+	primary key(id),
+	FOREIGN KEY (listing_id) REFERENCES listing(id)
+);
+
+create table listing_detail (
+	id bigint not null auto_increment,
+	listing_id bigint,
+	overview varchar(3000),
+	master_bedroom varchar(255),
+	full_bathrooms int,
+	half_bathrooms int,
+	dining_kitchen boolean,
+	dining_room boolean,
+	stories int,
+	exterior varchar(50),
+	parking varchar(50),
+	status varchar(20),
+	primary key(id),
+	foreign key (listing_id) references listing(id)
+);
+
+create table exterior_feature (
+	id bigint not null auto_increment,
+	listing_detail_id bigint,
+	name varchar(50),
+	primary key(id),
+	foreign key(listing_detail_id) references listing_detail(id)
+);
+
+create table other_room (
+	id bigint not null auto_increment,
+	listing_detail_id bigint,
+	name varchar(50),
+	primary key(id),
+	foreign key(listing_detail_id) references listing_detail(id)
 );
 
 insert into address values(NULL, '534 Queen St.', 'Philadelphia', 'PA', '19147');

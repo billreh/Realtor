@@ -23,9 +23,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @PropertySource("classpath:/META-INF/database.properties")
 @EnableTransactionManagement
 @EnableAsync
-*/
 public class DatabaseConfig {
-	/*
 	@Autowired
 	private Environment env;
 
@@ -58,5 +56,5 @@ public class DatabaseConfig {
 	public PlatformTransactionManager platformTransactionManager(EntityManagerFactory entityManagerFactory) {
 		return new JpaTransactionManager(entityManagerFactory);
 	}
-	*/
 }
+*/

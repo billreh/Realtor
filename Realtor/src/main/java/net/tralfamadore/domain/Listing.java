@@ -1,13 +1,16 @@
 package net.tralfamadore.domain;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -34,12 +37,17 @@ public class Listing {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "agent_id", referencedColumnName = "id")
 	private Agent agent;
+	@Column(name = "main_photo")
+	private String mainPhoto;
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinColumn(name = "listing_id", referencedColumnName = "id")
+	private List<Photo> photos;
 	
 	public Listing() {
 		
 	}
 	
-	public Listing(Long id, Address address, int price, String houseType, float baths, int bedrooms, int squareFeet, Agent agent) {
+	public Listing(Long id, Address address, int price, String houseType, float baths, int bedrooms, int squareFeet, Agent agent, String mainPhoto, List<Photo> photos) {
 		this.id = id;
 		this.address = address;
 		this.price = price;
@@ -48,6 +56,8 @@ public class Listing {
 		this.bedrooms = bedrooms;
 		this.squareFeet = squareFeet;
 		this.agent = agent;
+		this.mainPhoto = mainPhoto;
+		this.photos = photos;
 	}
 
 	public Long getId() {
@@ -114,9 +124,26 @@ public class Listing {
 		this.squareFeet = squareFeet;
 	}
 
+	public String getMainPhoto() {
+		return mainPhoto;
+	}
+
+	public void setMainPhoto(String mainPhoto) {
+		this.mainPhoto = mainPhoto;
+	}
+
+	public List<Photo> getPhotos() {
+		return photos;
+	}
+
+	public void setPhotos(List<Photo> photos) {
+		this.photos = photos;
+	}
+
 	@Override
 	public String toString() {
-		return "Listing [address=" + address + ", price=" + price + ", houseType=" + houseType + ", baths=" + baths
-				+ ", bedrooms=" + bedrooms + ", squareFeet=" + squareFeet + ", agent=" + agent + "]";
+		return "Listing [id=" + id + ", address=" + address + ", price=" + price + ", houseType=" + houseType
+				+ ", baths=" + baths + ", bedrooms=" + bedrooms + ", squareFeet=" + squareFeet + ", agent=" + agent
+				+ ", mainPhoto=" + mainPhoto + ", photos=" + photos + "]";
 	}
 }

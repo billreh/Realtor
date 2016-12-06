@@ -69,4 +69,20 @@
 
 	<!-- Detect @Transactional -->
 	<tx:annotation-driven transaction-manager="transactionManager" />
+	
+	<!-- Mail -->
+	<bean class="org.springframework.mail.javamail.JavaMailSenderImpl"
+		id="mailSender">
+		<property name="host" value="localhost" />
+		<property name="protocol" value="smtp" />
+		<property name="port" value="2525" />
+		<property name="username" value="test" />
+		<property name="password" value="test" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+			</props>
+		</property>
+	</bean>
 </beans>

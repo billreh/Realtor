@@ -1,5 +1,7 @@
 package net.tralfamadore.dto;
 
+import java.util.Arrays;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ListingListDto {
@@ -23,12 +25,16 @@ public class ListingListDto {
 	private int squareFeet;
 	@JsonProperty("_price")
 	private int price;
+	@JsonProperty("_mainPhoto")
+	private String mainPhoto;
+	@JsonProperty("_photos")
+	private String[] photos;
 	
 	public ListingListDto() {
 	}
 	
 	public ListingListDto(long id, String street, String city, String state, String zipCode, String houseType, int bedrooms,
-			float bathrooms, int squareFeet, int price) {
+			float bathrooms, int squareFeet, int price, String mainPhoto, String[] photos) {
 		this.id = id;
 		this.street = street;
 		this.city = city;
@@ -39,6 +45,8 @@ public class ListingListDto {
 		this.bathrooms = bathrooms;
 		this.squareFeet = squareFeet;
 		this.price = price;
+		this.mainPhoto = mainPhoto;
+		this.photos = photos;
 	}
 	
 	public long getId() {
@@ -121,10 +129,27 @@ public class ListingListDto {
 		this.price = price;
 	}
 
+	public String getMainPhoto() {
+		return mainPhoto;
+	}
+
+	public void setMainPhoto(String mainPhoto) {
+		this.mainPhoto = mainPhoto;
+	}
+
+	public String[] getPhotos() {
+		return photos;
+	}
+
+	public void setPhotos(String[] photos) {
+		this.photos = photos;
+	}
+
 	@Override
 	public String toString() {
 		return "ListingListDto [id=" + id + ", street=" + street + ", city=" + city + ", state=" + state + ", zipCode="
 				+ zipCode + ", houseType=" + houseType + ", bedrooms=" + bedrooms + ", bathrooms=" + bathrooms
-				+ ", squareFeet=" + squareFeet + ", price=" + price + "]";
+				+ ", squareFeet=" + squareFeet + ", price=" + price + ", mainPhoto=" + mainPhoto + ", photos="
+				+ Arrays.toString(photos) + "]";
 	}
 }

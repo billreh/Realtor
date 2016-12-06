@@ -11,9 +11,8 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import net.tralfamadore.domain.Address;
-import net.tralfamadore.domain.Agent;
 import net.tralfamadore.domain.Listing;
+import net.tralfamadore.domain.ListingDetail;
 
 @Repository
 public class ListingDao {
@@ -68,5 +67,13 @@ public class ListingDao {
 		l.setPrice(listing.getPrice());
 		l.setSquareFeet(listing.getSquareFeet());
 		em.merge(l);
+	}
+
+	public Listing getListing(long listingId) {
+		return em.createQuery("from Listing where id = :id", Listing.class).setParameter("id", listingId).getSingleResult();
+	}
+
+	public ListingDetail getListingDetail(long listingId) {
+		return em.createQuery("from ListingDetail where id = :id", ListingDetail.class).setParameter("id", listingId).getSingleResult();
 	}
 }

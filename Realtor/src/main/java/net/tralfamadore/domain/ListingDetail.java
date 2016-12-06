@@ -2,27 +2,68 @@ package net.tralfamadore.domain;
 
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "listing_detail")
 public class ListingDetail {
-	private long id;
-	private long listingId;
+	@Column
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+	@OneToOne
+	@JoinColumn(name = "listing_id", referencedColumnName = "id")
+	private Listing listing;
+	@Column
 	private String overview;
+	@Column(name = "master_bedroom")
 	private String masterBedroom;
+	@Column(name = "full_bathrooms")
 	private int fullBathrooms;
+	@Column(name = "half_bathrooms")
 	private int halfBathrooms;
-	private String diningKitchen;
+	@Column(name = "dining_kitchen")
+	private boolean diningKitchen;
+	@Column(name = "dining_room")
 	private boolean diningRoom;
-	private List<String> exteriorFeatures;
-	private List<String> otherRooms;
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinColumn(name = "listing_detail_id", referencedColumnName = "id")
+	private List<ExteriorFeature> exteriorFeatures;
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinColumn(name = "listing_detail_id", referencedColumnName = "id")
+	private List<OtherRoom> otherRooms;
+	@Column
 	private int stories;
+	@Column
 	private String exterior;
+	@Column
 	private String parking;
-	private int price;
+	@Column
+	private String status;
+	@Column
+	private String style;
+	@Column(name = "year_built")
+	private int yearBuilt;
+	@Column(name = "school_district")
+	private String schoolDistrict;
 	
-	public ListingDetail(long id, long listingId, String overview, String masterBedroom, int fullBathrooms, int halfBathrooms,
-			String diningKitchen, boolean diningRoom, List<String> exteriorFeatures, List<String> otherRooms,
-			int stories, String exterior, String parking, int price) {
+	public ListingDetail() {
+	}
+	
+	public ListingDetail(Long id, Listing listing, String overview, String masterBedroom, int fullBathrooms, int halfBathrooms,
+			boolean diningKitchen, boolean diningRoom, List<ExteriorFeature> exteriorFeatures, List<OtherRoom> otherRooms,
+			int stories, String exterior, String parking, String status) {
 		this.id = id;
-		this.listingId = listingId;
+		this.listing= listing;
 		this.overview = overview;
 		this.masterBedroom = masterBedroom;
 		this.fullBathrooms = fullBathrooms;
@@ -34,23 +75,23 @@ public class ListingDetail {
 		this.stories = stories;
 		this.exterior = exterior;
 		this.parking = parking;
-		this.price = price;
+		this.status = status;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public long getListingId() {
-		return listingId;
+	public Listing getListing() {
+		return listing;
 	}
 
-	public void setListingId(long listingId) {
-		this.listingId = listingId;
+	public void setListing(Listing listing) {
+		this.listing= listing;
 	}
 
 	public String getOverview() {
@@ -85,11 +126,11 @@ public class ListingDetail {
 		this.halfBathrooms = halfBathrooms;
 	}
 
-	public String getDiningKitchen() {
+	public boolean isDiningKitchen() {
 		return diningKitchen;
 	}
 
-	public void setDiningKitchen(String diningKitchen) {
+	public void setDiningKitchen(boolean diningKitchen) {
 		this.diningKitchen = diningKitchen;
 	}
 
@@ -101,19 +142,19 @@ public class ListingDetail {
 		this.diningRoom = diningRoom;
 	}
 
-	public List<String> getExteriorFeatures() {
+	public List<ExteriorFeature> getExteriorFeatures() {
 		return exteriorFeatures;
 	}
 
-	public void setExteriorFeatures(List<String> exteriorFeatures) {
+	public void setExteriorFeatures(List<ExteriorFeature> exteriorFeatures) {
 		this.exteriorFeatures = exteriorFeatures;
 	}
 
-	public List<String> getOtherRooms() {
+	public List<OtherRoom> getOtherRooms() {
 		return otherRooms;
 	}
 
-	public void setOtherRooms(List<String> otherRooms) {
+	public void setOtherRooms(List<OtherRoom> otherRooms) {
 		this.otherRooms = otherRooms;
 	}
 
@@ -141,11 +182,44 @@ public class ListingDetail {
 		this.parking = parking;
 	}
 
-	public int getPrice() {
-		return price;
+	public String getStatus() {
+		return status;
 	}
 
-	public void setPrice(int price) {
-		this.price = price;
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getStyle() {
+		return style;
+	}
+
+	public void setStyle(String style) {
+		this.style = style;
+	}
+
+	public int getYearBuilt() {
+		return yearBuilt;
+	}
+
+	public void setYearBuilt(int yearBuilt) {
+		this.yearBuilt = yearBuilt;
+	}
+
+	public String getSchoolDistrict() {
+		return schoolDistrict;
+	}
+
+	public void setSchoolDistrict(String schoolDistrict) {
+		this.schoolDistrict = schoolDistrict;
+	}
+
+	@Override
+	public String toString() {
+		return "ListingDetail [id=" + id + ", listing=" + listing + ", overview=" + overview + ", masterBedroom="
+				+ masterBedroom + ", fullBathrooms=" + fullBathrooms + ", halfBathrooms=" + halfBathrooms
+				+ ", diningKitchen=" + diningKitchen + ", diningRoom=" + diningRoom + ", exteriorFeatures="
+				+ exteriorFeatures + ", otherRooms=" + otherRooms + ", stories=" + stories + ", exterior=" + exterior
+				+ ", parking=" + parking + ", status=" + status + "]";
 	}
 }

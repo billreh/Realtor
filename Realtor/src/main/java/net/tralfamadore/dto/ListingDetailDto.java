@@ -1,5 +1,7 @@
 package net.tralfamadore.dto;
 
+import java.util.Arrays;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ListingDetailDto {
@@ -30,7 +32,7 @@ public class ListingDetailDto {
 	@JsonProperty("_halfBathrooms")
 	private int halfBathrooms;
 	@JsonProperty("_diningKitchen")
-	private String diningKitchen;
+	private boolean diningKitchen;
 	@JsonProperty("_diningRoom")
 	private boolean diningRoom;
 	@JsonProperty("_exteriorFeatures")
@@ -45,14 +47,27 @@ public class ListingDetailDto {
 	private String parking;
 	@JsonProperty("_price")
 	private int price;
+	@JsonProperty("_mainPhoto")
+	private String mainPhoto;
+	@JsonProperty("_photos")
+	private String[] photos;
+	@JsonProperty("_status")
+	private String status;
+	@JsonProperty("_style")
+	private String style;
+	@JsonProperty("_yearBuilt")
+	private int yearBuilt;
+	@JsonProperty("_schoolDistrict")
+	private String schoolDistrict;
 	
 	public ListingDetailDto() {
 	}
 
 	public ListingDetailDto(long id, String street, String city, String state, String zipCode, String houseType, int bedrooms,
 			float bathrooms, int squareFeet, String overview, String masterBedroom, int fullBathrooms,
-			int halfBathrooms, String diningKitchen, boolean diningRoom, String[] exteriorFeatures, String[] otherRooms,
-			int stories, String exterior, String parking, int price) {
+			int halfBathrooms, boolean diningKitchen, boolean diningRoom, String[] exteriorFeatures, String[] otherRooms,
+			int stories, String exterior, String parking, int price, String mainPhoto, String[] photos, String status,
+			String style, int yearBuilt, String schoolDistrict) {
 		this.id = id;
 		this.street = street;
 		this.city = city;
@@ -74,6 +89,12 @@ public class ListingDetailDto {
 		this.exterior = exterior;
 		this.parking = parking;
 		this.price = price;
+		this.mainPhoto = mainPhoto;
+		this.photos = photos;
+		this.status = status;
+		this.style = style;
+		this.yearBuilt = yearBuilt;
+		this.schoolDistrict = schoolDistrict;
 	}
 
 	public long getId() {
@@ -180,11 +201,11 @@ public class ListingDetailDto {
 		this.halfBathrooms = halfBathrooms;
 	}
 
-	public String getDiningKitchen() {
+	public boolean isDiningKitchen() {
 		return diningKitchen;
 	}
 
-	public void setDiningKitchen(String diningKitchen) {
+	public void setDiningKitchen(boolean diningKitchen) {
 		this.diningKitchen = diningKitchen;
 	}
 
@@ -242,5 +263,66 @@ public class ListingDetailDto {
 
 	public void setPrice(int price) {
 		this.price = price;
+	}
+
+	public String getMainPhoto() {
+		return mainPhoto;
+	}
+
+	public void setMainPhoto(String mainPhoto) {
+		this.mainPhoto = mainPhoto;
+	}
+
+	public String[] getPhotos() {
+		return photos;
+	}
+
+	public void setPhotos(String[] photos) {
+		this.photos = photos;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getStyle() {
+		return style;
+	}
+
+	public void setStyle(String style) {
+		this.style = style;
+	}
+
+	public int getYearBuilt() {
+		return yearBuilt;
+	}
+
+	public void setYearBuilt(int yearBuilt) {
+		this.yearBuilt = yearBuilt;
+	}
+
+	public String getSchoolDistrict() {
+		return schoolDistrict;
+	}
+
+	public void setSchoolDistrict(String schoolDistrict) {
+		this.schoolDistrict = schoolDistrict;
+	}
+
+	@Override
+	public String toString() {
+		return "ListingDetailDto [id=" + id + ", street=" + street + ", city=" + city + ", state=" + state
+				+ ", zipCode=" + zipCode + ", houseType=" + houseType + ", bedrooms=" + bedrooms + ", bathrooms="
+				+ bathrooms + ", squareFeet=" + squareFeet + ", overview=" + overview + ", masterBedroom="
+				+ masterBedroom + ", fullBathrooms=" + fullBathrooms + ", halfBathrooms=" + halfBathrooms
+				+ ", diningKitchen=" + diningKitchen + ", diningRoom=" + diningRoom + ", exteriorFeatures="
+				+ Arrays.toString(exteriorFeatures) + ", otherRooms=" + Arrays.toString(otherRooms) + ", stories="
+				+ stories + ", exterior=" + exterior + ", parking=" + parking + ", price=" + price + ", mainPhoto="
+				+ mainPhoto + ", photos=" + Arrays.toString(photos) + ", status=" + status + ", style=" + style
+				+ ", yearBuilt=" + yearBuilt + ", schoolDistrict=" + schoolDistrict + "]";
 	}
 }
